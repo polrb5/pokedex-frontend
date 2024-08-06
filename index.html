@@ -7,23 +7,15 @@
   <title>Pokedex Search</title>
 </head>
 <body>
-  <header>
-    <img src="assets/images/logo.png" alt="Pokedex Logo">
-    <input type="text" id="search" placeholder="Search for a Pokemon">
-  </header>
-  <aside>
-    <div id="filters">
-      <h2>Filters</h2>
-      <!-- Filter options will go here -->
-    </div>
-  </aside>
+  <header id="header" class="header"></header>
+  <aside id="filters" class="filters"></aside>
   <main>
-    <div id="pokemon-list">
-      <h2>Pokemon list</h2>
-      <!-- Pokemon cards will be displayed here -->
-    </div>
-    <button id="load-more">Load More</button>
+    <div id="pokemon-list" class="pokemon-list"></div>
+    <button id="load-more" class="pokemon-list__load-more">Load More</button>
   </main>
-  <script src="src/js/main.js"></script>
+  <script type="module" src="src/js/header.js"></script>
+  <script type="module" src="src/js/filters.js"></script>
+  <script type="module" src="src/js/pokemon-list.js"></script>
+  <script type="module" src="src/js/main.js"></script>
 </body>
 </html>

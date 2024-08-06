@@ -4,10 +4,12 @@
   "description": "Pokedex search interface",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
+    "build": "yarn lint && yarn less && vite build",
+    "serve": "vite preview",
     "less": "lessc src/styles/styles.less assets/css/styles.css",
     "less:watch": "less-watch-compiler src/styles assets/css",
     "lint": "eslint src/js",
-    "build": "yarn lint && yarn less",
     "start": "concurrently \"yarn less:watch\" \"http-server -c-1 -p 3000 .\""
   },
   "repository": {
@@ -26,5 +28,8 @@
     "http-server": "^14.1.1",
     "less": "^4.2.0",
     "less-watch-compiler": "^1.16.3"
+  },
+  "dependencies": {
+    "vite": "^5.3.5"
   }
 }
