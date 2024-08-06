@@ -1,0 +1,30 @@
+{
+  "name": "pokedex-frontend",
+  "version": "1.0.0",
+  "description": "Pokedex search interface",
+  "main": "index.js",
+  "scripts": {
+    "less": "lessc src/styles/styles.less assets/css/styles.css",
+    "less:watch": "less-watch-compiler src/styles assets/css",
+    "lint": "eslint src/js",
+    "build": "yarn lint && yarn less",
+    "start": "concurrently \"yarn less:watch\" \"http-server -c-1 -p 3000 .\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:polrb5/pokedex-frontend.git"
+  },
+  "author": "Pol Reig <polreigbroto@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "concurrently": "^8.2.2",
+    "eslint": "9.x",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "globals": "^15.9.0",
+    "http-server": "^14.1.1",
+    "less": "^4.2.0",
+    "less-watch-compiler": "^1.16.3"
+  }
+}

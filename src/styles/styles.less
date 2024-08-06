@@ -1,0 +1,62 @@
+@import "variables";
+
+* {
+  min-width: 0;
+  font: inherit;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  max-width: 100%;
+  font-size: 62.5%;
+}
+
+img, video, svg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  background-color: @primary-color;
+
+  img {
+    height: 50px;
+  }
+
+  input {
+    padding: 0.5em;
+    font-size: 1rem;
+    flex-grow: 1;
+    margin-left: 1em;
+    max-width: 12rem;
+  }
+}
+
+#filters {
+  padding: 1em;
+}
+
+#pokemon-list {
+  padding: 1em;
+}
+
+.pokemon-card {
+  padding: 1em;
+}
