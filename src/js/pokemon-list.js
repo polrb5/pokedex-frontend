@@ -1,8 +1,8 @@
 import { sortPokemonById } from './utils/data.js';
 import { displayMessage } from './utils/message.js';
 
-const API_URL = import.meta.env.VITE_API_URL;
-const ASSETS_URL = import.meta.env.VITE_ASSETS_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const ASSETS_URL = import.meta.env.VITE_ASSETS_BASE_URL;
 
 export const initPokemonList = () => {
   const pokemonList = document.getElementById('pokemon-list');
@@ -26,7 +26,7 @@ export const initPokemonList = () => {
   const fetchPokemon = async () => {
     showLoadingMessage();
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(`${API_BASE_URL}/pokedex/national`);
       if (!response.ok) {
         showErrorMessage('Failed to load data. Please try again.');
         return;

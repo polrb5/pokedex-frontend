@@ -1,21 +1,27 @@
 @import "variables";
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1em;
   background-color: @primary-color;
+  
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    max-width: 1140px;
+    margin: 0 auto;
 
-  &__logo {
-    height: 50px;
-  }
-
-  &__search {
-    padding: 0.5em;
-    font-size: 1rem;
-    flex-grow: 1;
-    margin-left: 1em;
-    max-width: 12rem;
+    &__logo {
+      height: 50px;
+    }
+  
+    &__search {
+      flex-grow: 1;
+      padding: 0.5em;
+      margin-left: 1em;
+      max-width: 12rem;
+      font-size: 1rem;
+      border-radius: .5rem;
+    }
   }
 }

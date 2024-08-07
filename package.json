@@ -4,7 +4,7 @@
   "description": "Pokedex search interface",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"yarn less:watch\" vite",
     "build": "yarn lint && yarn less && vite build",
     "serve": "vite preview",
     "less": "lessc src/styles/styles.less assets/css/styles.css",
