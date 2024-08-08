@@ -4,13 +4,12 @@
   "description": "Pokedex search interface",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"yarn less:watch\" vite",
+    "dev": "vite",
     "build": "yarn lint && yarn less && vite build",
     "serve": "vite preview",
     "less": "lessc src/styles/styles.less assets/css/styles.css",
     "less:watch": "less-watch-compiler src/styles assets/css",
-    "lint": "eslint src/js",
-    "start": "concurrently \"yarn less:watch\" \"http-server -c-1 -p 3000 .\""
+    "lint": "eslint src/js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +19,6 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.8.0",
-    "concurrently": "^8.2.2",
     "eslint": "9.x",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
@@ -30,6 +28,7 @@
     "less-watch-compiler": "^1.16.3"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "vite": "^5.3.5"
   }
 }

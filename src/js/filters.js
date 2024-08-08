@@ -1,8 +1,10 @@
-// filters.js
 import { fetchData } from './services/api.js';
 import { API_PATHS } from './constants/api.js';
+import { displayMessage } from './utils/message.js';
+import { MESSAGE_TYPE } from './constants/message';
+import { FILTER_TYPE } from './constants/filters';
 
-const filterState = {
+export const filterState = {
   types: new Set(),
   colors: new Set(),
   genders: new Set(),
@@ -47,10 +49,14 @@ const createFilterSection = (title, items, category) => {
   header.textContent = title;
   section.appendChild(header);
 
+  const sectionClass = category === FILTER_TYPE.TYPES ? 'filters__types' : category === FILTER_TYPE.COLORS ? 'filters__colors' : '';
+  const itemContainer = document.createElement('div');
+  itemContainer.className = sectionClass;
   items.forEach(item => {
     const filterCheckbox = createFilterCheckbox(item.name, item.name, category);
-    section.appendChild(filterCheckbox);
+    itemContainer.appendChild(filterCheckbox);
   });
+  section.appendChild(itemContainer);
 
   return section;
 };
@@ -69,13 +75,6 @@ const createResetButton = () => {
   return resetButton;
 };
 
-const displayErrorMessage = (message) => {
-  const errorMessage = document.createElement('p');
-  errorMessage.className = 'filters__error-message';
-  errorMessage.textContent = message;
-  return errorMessage;
-};
-
 export const initializeFilters = async () => {
   const filtersContainer = document.getElementById('filters');
   if (!filtersContainer) {
@@ -85,34 +84,33 @@ export const initializeFilters = async () => {
 
   const [typesData, colorsData, gendersData] = await Promise.all([
     fetchData(API_PATHS.TYPES),
-    fetchData(API_PATHS.COLORS),
-    fetchData(API_PATHS.GENDERS)
+    fetchData(API_PATHS.COLOR),
+    fetchData(API_PATHS.GENDER)
   ]);
 
   if (typesData.error) {
-    filtersContainer.appendChild(displayErrorMessage(typesData.error));
+    displayMessage(filtersContainer, typesData.error, MESSAGE_TYPE.ERROR);
   } else {
-    const typeSection = createFilterSection('Type', typesData.results, 'types');
+    const typeSection = createFilterSection('Type', typesData.data.results, FILTER_TYPE.TYPES);
     filtersContainer.appendChild(typeSection);
   }
 
   if (colorsData.error) {
-    filtersContainer.appendChild(displayErrorMessage(colorsData.error));
+    displayMessage(filtersContainer, colorsData.error, MESSAGE_TYPE.ERROR);
   } else {
-    const colorSection = createFilterSection('Color', colorsData.results, 'colors');
+    const colorSection = createFilterSection('Color', colorsData.data.results, FILTER_TYPE.COLORS);
     filtersContainer.appendChild(colorSection);
   }
 
   if (gendersData.error) {
-    filtersContainer.appendChild(displayErrorMessage(gendersData.error));
+    displayMessage(filtersContainer, gendersData.error, MESSAGE_TYPE.ERROR);
   } else {
-    const genderSection = createFilterSection('Gender', gendersData.results, 'genders');
+    const genderSection = createFilterSection('Gender', gendersData.data.results, FILTER_TYPE.GENDER);
     filtersContainer.appendChild(genderSection);
   }
 
   const resetButton = createResetButton();
   filtersContainer.appendChild(resetButton);
-  console.log('initializeFilters ~ filtersContainer:', filtersContainer);
 };
 
 const applyFilters = () => {

@@ -1,11 +1,16 @@
 @import "variables";
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .pokemon-list {
-  padding: 1em;
+  padding: 2rem;
 
   &__cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
     gap: 1rem;
   }
 
@@ -24,29 +29,6 @@
   &__load-more {
     margin: 1em auto;
     display: none;
-    padding: 0.5em 1em;
-    font-size: 1rem;
-    background-color: @primary-color;
-    color: @white;
-    border: none;
-    border-radius: .5rem;
-    cursor: pointer;
-
-    &:hover {
-      background-color: darken(@primary-color, 10%);
-    }
-  }
-
-  &__info-message {
-    text-align: center;
-    font-size: 1.4rem;
-    color: @black;
-    margin-top: 2em;
-  }
-
-  &__retry-button {
-    display: block;
-    margin: 1rem auto;
     padding: 0.5em 1em;
     font-size: 1rem;
     background-color: @primary-color;

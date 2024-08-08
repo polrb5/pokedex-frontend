@@ -1,25 +1,25 @@
 @import "variables";
 
 .filters {
-  padding: 1em;
-  background-color: #f9f9f9;
-  max-width: 200px;
+  padding: 1rem;
+  max-width: 30rem;
+  border-right: 2px solid @light-grey;
 
   &__section {
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
   }
 
   &__header {
     margin-bottom: 0.5em;
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 1.1rem;
   }
 
   &__item {
     display: flex;
     align-items: center;
     margin-bottom: 0.5em;
-    font-size: 1.4rem;
+    font-size: 0.9rem;
 
     input {
       margin-right: 0.5em;
@@ -37,7 +37,7 @@
     border-radius: 0.5rem;
     cursor: pointer;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.9rem;
 
     &:hover {
       background-color: darken(@primary-color, 10%);
@@ -48,5 +48,19 @@
     color: red;
     font-weight: bold;
     margin-bottom: 1em;
+  }
+
+  &__types, &__colors {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .filters {
+    &__types, &__colors {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

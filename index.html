@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search and filter different Pokemon using the Pokedex Search.">
   <link rel="stylesheet" href="assets/css/styles.css">
-  <title>Pokedex Search</title>
+  <link rel="icon" href="public/favicon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="public/favicon/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="public/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="preconnect" href="https://pokeapi.co">
+  <link rel="canonical" href="https://pokedex-frontend-topaz.vercel.app/">
+  <title>Pokedex Search | Find Your Favorite Pokemon</title>
 </head>
 <body>
   <header id="header" class="header"></header>
-  <div class="container">
-    <aside id="filters" class="filters"></aside>
-    <main class="main">
+  <div class="content">
+    <aside id="filters" class="filters fade-in-left"></aside>
+    <main class="content__main fade-in">
       <div id="pokemon-list" class="pokemon-list"></div>
     </main>
   </div>
   <script type="module" src="src/js/header.js"></script>
-  <script type="module" src="src/js/filters.js"></script>
-  <script type="module" src="src/js/pokemon-list.js"></script>
   <script type="module" src="src/js/main.js"></script>
 </body>
 </html>

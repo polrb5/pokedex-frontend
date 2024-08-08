@@ -1,0 +1,72 @@
+@import "variables";
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  0% { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1140px;
+  margin: 0 auto;
+  
+  &__main {
+    flex-grow: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.fade-in-left {
+  animation: fadeInLeft 1s ease-in-out;
+}
+
+.info-message {
+  text-align: center;
+  font-size: 1.4rem;
+  color: @black;
+  margin-top: 2em;
+
+  &--error {
+    color: @error;
+  }
+}
+
+.retry-button {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  background-color: @primary-color;
+  color: @white;
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(@primary-color, 10%);
+  }
+}
+
+.spinner {
+  margin: 2em auto;
+  border: 4px solid @light-grey; 
+  border-top: 4px solid @primary-color;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
