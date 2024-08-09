@@ -51,7 +51,7 @@ export const initPokemonList = () => {
 
     const fetchTypePromises = Array.from(types).map(type => fetchData(`${API_PATHS.TYPE}/${type}`));
     const fetchColorPromises = Array.from(colors).map(color =>  fetchData(`${API_PATHS.COLOR}/${color}`));
-    const fetchGenderPromises = Array.from(genders).map(gender => gender !== 'all' ? fetchData(`${API_PATHS.GENDER}/${gender}`) : null);
+    const fetchGenderPromises = Array.from(genders).map(gender => fetchData(`${API_PATHS.GENDER}/${gender}`));
 
     const [typeResults, colorResults, genderResults] = await Promise.all([
       Promise.all(fetchTypePromises),

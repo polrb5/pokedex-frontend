@@ -8,9 +8,11 @@
   &__section {
     margin-bottom: 1rem;
   }
-
+  
   &__header {
-    margin-bottom: 0.5em;
+    margin-bottom: .5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid @grey;
     font-weight: bold;
     font-size: 1.1rem;
   }
@@ -20,10 +22,15 @@
     align-items: center;
     margin-bottom: 0.5em;
     font-size: 0.9rem;
-
+    
     input {
       margin-right: 0.5em;
       accent-color: @primary-color;
+      cursor: pointer;
+    }
+    
+    label {
+      cursor: pointer;
     }
   }
 
@@ -31,7 +38,7 @@
     display: block;
     width: 100%;
     padding: 0.5em;
-    margin-top: 1em;
+    margin-top: 1.5rem;
     background-color: @primary-color;
     color: @white;
     border: none;

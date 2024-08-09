@@ -3,6 +3,7 @@ import { API_PATHS } from './constants/api.js';
 import { displayMessage } from './utils/message.js';
 import { MESSAGE, MESSAGE_TYPE } from './constants/message';
 import { FILTER_TYPE } from './constants/filters';
+import { capitalize } from './utils/text';
 
 export const filterState = {
   types: new Set(),
@@ -33,7 +34,8 @@ const createFilterCheckbox = (name, value, category) => {
 
   const label = document.createElement('label');
   label.htmlFor = value;
-  label.textContent = name;
+  const capitalizedLabel = capitalize(name)
+  label.textContent = capitalizedLabel;
 
   container.appendChild(input);
   container.appendChild(label);
@@ -64,14 +66,19 @@ const createFilterSection = (title, items, category) => {
 const createResetButton = () => {
   const resetButton = document.createElement('button');
   resetButton.className = 'filters__reset-button';
-  resetButton.textContent = 'Reset Filters';
+  resetButton.textContent = 'Reset All';
   resetButton.addEventListener('click', () => {
     Array.from(document.querySelectorAll('.filters__item input')).map(input => input.checked = false);
     filterState.types.clear();
     filterState.colors.clear();
     filterState.genders.clear();
     applyFilters();
+    
+    const searchInput = document.getElementById('search');
+    if (searchInput) searchInput.value = '';
   });
+
+  
   return resetButton;
 };
 
