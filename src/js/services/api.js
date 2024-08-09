@@ -15,11 +15,3 @@ export const fetchData = async (endpoint) => {
 };
 
 export const getPokemonImageUrl = (id) => `${ASSETS_URL}${id.toString().padStart(3, '0')}.png`;
-
-export const getPokemonUrls = async (endpoint, key, subKey = null) => {
-  const { data, error } = await fetchData(endpoint);
-  if (error) {
-    throw new Error(error);
-  }
-  return data[key].map(p => ({ url: `${API_BASE_URL}/pokemon/${subKey ? p[subKey].name : p.name}` }));
-};

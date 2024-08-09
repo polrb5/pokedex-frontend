@@ -3,5 +3,5 @@ export const API_PATHS = {
   GENDER: 'gender',
   POKEDEX_NATIONAL : '/pokedex/national',
   POKEMON: 'pokemon',
-  TYPES: 'type',
+  TYPE: 'type',
 };

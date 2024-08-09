@@ -1,7 +1,7 @@
 import { fetchData } from './services/api.js';
 import { API_PATHS } from './constants/api.js';
 import { displayMessage } from './utils/message.js';
-import { MESSAGE_TYPE } from './constants/message';
+import { MESSAGE, MESSAGE_TYPE } from './constants/message';
 import { FILTER_TYPE } from './constants/filters';
 
 export const filterState = {
@@ -27,6 +27,7 @@ const createFilterCheckbox = (name, value, category) => {
     } else {
       filterState[category].delete(value);
     }
+
     applyFilters();
   });
 
@@ -52,10 +53,9 @@ const createFilterSection = (title, items, category) => {
   const sectionClass = category === FILTER_TYPE.TYPES ? 'filters__types' : category === FILTER_TYPE.COLORS ? 'filters__colors' : '';
   const itemContainer = document.createElement('div');
   itemContainer.className = sectionClass;
-  items.forEach(item => {
-    const filterCheckbox = createFilterCheckbox(item.name, item.name, category);
-    itemContainer.appendChild(filterCheckbox);
-  });
+
+  itemContainer.append(...items.map(item => createFilterCheckbox(item.name, item.name, category)));
+
   section.appendChild(itemContainer);
 
   return section;
@@ -66,7 +66,7 @@ const createResetButton = () => {
   resetButton.className = 'filters__reset-button';
   resetButton.textContent = 'Reset Filters';
   resetButton.addEventListener('click', () => {
-    document.querySelectorAll('.filters__item input').forEach(input => input.checked = false);
+    Array.from(document.querySelectorAll('.filters__item input')).map(input => input.checked = false);
     filterState.types.clear();
     filterState.colors.clear();
     filterState.genders.clear();
@@ -77,37 +77,24 @@ const createResetButton = () => {
 
 export const initializeFilters = async () => {
   const filtersContainer = document.getElementById('filters');
-  if (!filtersContainer) {
-    console.error('Filters container not found');
-    return;
-  }
+  if (!filtersContainer) return displayMessage(filtersContainer, MESSAGE.NO_FILTERS_FOUND, MESSAGE_TYPE.ERROR);
 
   const [typesData, colorsData, gendersData] = await Promise.all([
-    fetchData(API_PATHS.TYPES),
+    fetchData(API_PATHS.TYPE),
     fetchData(API_PATHS.COLOR),
     fetchData(API_PATHS.GENDER)
   ]);
 
-  if (typesData.error) {
-    displayMessage(filtersContainer, typesData.error, MESSAGE_TYPE.ERROR);
-  } else {
-    const typeSection = createFilterSection('Type', typesData.data.results, FILTER_TYPE.TYPES);
-    filtersContainer.appendChild(typeSection);
-  }
+  const handleFilterSection = (data, label, filterType) => {
+    if (data.error) return displayMessage(filtersContainer, data.error, MESSAGE_TYPE.ERROR);
 
-  if (colorsData.error) {
-    displayMessage(filtersContainer, colorsData.error, MESSAGE_TYPE.ERROR);
-  } else {
-    const colorSection = createFilterSection('Color', colorsData.data.results, FILTER_TYPE.COLORS);
-    filtersContainer.appendChild(colorSection);
-  }
+    const section = createFilterSection(label, data.data.results, filterType);
+    filtersContainer.appendChild(section);
+  };
 
-  if (gendersData.error) {
-    displayMessage(filtersContainer, gendersData.error, MESSAGE_TYPE.ERROR);
-  } else {
-    const genderSection = createFilterSection('Gender', gendersData.data.results, FILTER_TYPE.GENDER);
-    filtersContainer.appendChild(genderSection);
-  }
+  handleFilterSection(typesData, 'Type', FILTER_TYPE.TYPES);
+  handleFilterSection(colorsData, 'Color', FILTER_TYPE.COLORS);
+  handleFilterSection(gendersData, 'Gender', FILTER_TYPE.GENDER);
 
   const resetButton = createResetButton();
   filtersContainer.appendChild(resetButton);

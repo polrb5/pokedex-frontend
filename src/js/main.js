@@ -1,10 +1,7 @@
 import { initPokemonList } from './pokemon-list.js';
 import { initializeFilters } from './filters.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  // Dynamically import the header module
-  await import('./header.js');
-  
+document.addEventListener('DOMContentLoaded', async () => {  
   // Initialize filters and Pokemon list
   initializeFilters();
   initPokemonList();
